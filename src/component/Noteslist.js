@@ -1,13 +1,14 @@
 import React from 'react'
 import Note from './Note'
+import AddNote from './AddNote'
 
-const Noteslist = () => {
+const Noteslist = ( {notes} ) => {
   return (
     <div className='notes-list'>
-      <Note />
-      <Note />
-      <Note />
-      <Note />
+      {notes.map((note)=> (
+        <Note key={note.id} id={note.id} title={note.title} body={note.body}/>
+      ))}
+      <AddNote />
     </div>
   )
 }

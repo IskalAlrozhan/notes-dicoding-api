@@ -7,9 +7,6 @@ const Header = () => {
       <h1>Notes App</h1>
       <div className='header-right'>
         <button className='toggle'>
-          Add Note
-        </button>
-        <button className='toggle'>
           Archive Note
         </button>
       </div>

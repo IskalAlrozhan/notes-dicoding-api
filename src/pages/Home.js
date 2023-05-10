@@ -6,44 +6,50 @@ import axios from 'axios';
 
 const Home = () => {
 
-  const [notes, setNotes] = useState({});
+  const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken');
 
-    console.log(accessToken)
-
-    if(!accessToken) {
+    if (!accessToken) {
       navigate("/login")
     }
 
-    getNotes();
-
   }, [])
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    getNotes(accessToken);
+  }, [notes])
   
-  const getNotes = async(accessToken) => {
+
+  // console.log("disini = ", notes)
+
+  const getNotes = async (accessToken) => {
     try {
       const response = await axios.get('https://notes-api.dicoding.dev/v1/notes', {
-        headers: { 
-          Authorization: `Bearer ${accessToken}` 
+        headers: {
+          Authorization: `Bearer ${accessToken}`
         },
       })
 
-      console.log(response.data.message)
-      
+      setNotes(response.data.data)
+
     } catch (error) {
-        console.log(error.response.data)
+      console.log("error =", error.response.data)
     }
   }
 
+  
+
   return (
     <div className='container'>
-        {/* <div>
+      {/* <div>
           Selamat Datang {user}
         </div> */}
-        <Header/>
-        <Noteslist />
+      <Header />
+      <Noteslist notes={notes} />
     </div>
   )
 }

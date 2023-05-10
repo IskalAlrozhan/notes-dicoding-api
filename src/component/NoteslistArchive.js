@@ -1,13 +1,12 @@
 import React from 'react'
 import NoteArchive from './Note'
 
-const NoteslistArchive = () => {
+const NoteslistArchive = ({ notesarc }) => {
   return (
     <div className='notes-list'>
-      <NoteArchive />
-      <NoteArchive />
-      <NoteArchive />
-      <NoteArchive />
+      {notesarc.map((notearc) => (
+        <NoteArchive key={notearc.id} id={notearc.id} title={notearc.title} body={notearc.body} />
+      ))}
     </div>
   )
 }

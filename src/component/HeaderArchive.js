@@ -9,9 +9,6 @@ const HeaderArchive = () => {
         <button className='toggle'>
           Home
         </button>
-        <button className='toggle'>
-          Add Note
-        </button>
       </div>
     </div>
   )
