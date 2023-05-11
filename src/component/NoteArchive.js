@@ -6,20 +6,33 @@ const NoteArchive = ({ id, title, body }) => {
 
   const accessToken = sessionStorage.getItem('accessToken');
 
-  // const handleUnarchive = async () => {
-  //   try {
-  //     const response = await axios.post(`https://notes-api.dicoding.dev/v1/notes/${id}/unrchive`, {}, {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`
-  //       },
-  //     });
+  const handleUnarchive = async () => {
+    try {
+      const response = await axios.post(`https://notes-api.dicoding.dev/v1/notes/${id}/unarchive`, {}, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      });
 
-  //     console.log(response.data);
+      console.log(response.data);
 
-  //   } catch (error) {
-  //     console.log('Error:', error.response.data);
-  //   }
-  // };
+    } catch (error) {
+      console.log('Error:', error.response.data);
+    }
+  };
+
+  const handleDeleteNote = async () => {
+    try {
+      const response = await axios.delete(`https://notes-api.dicoding.dev/v1/notes/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='note' key={id}>
@@ -30,8 +43,8 @@ const NoteArchive = ({ id, title, body }) => {
       </div>
 
       <div className='note-footer'>
-        <MdUnarchive className='note-icon' size='1.3em' />
-        <MdDeleteForever className='note-icon' size='1.3em' />
+        <MdUnarchive className='note-icon' size='1.3em' onClick={handleUnarchive} />
+        <MdDeleteForever className='note-icon' size='1.3em' onClick={handleDeleteNote} />
       </div>
     </div>
   )

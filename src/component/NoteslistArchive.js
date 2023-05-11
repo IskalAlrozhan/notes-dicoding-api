@@ -1,5 +1,5 @@
 import React from 'react'
-import NoteArchive from './Note'
+import NoteArchive from './NoteArchive'
 
 const NoteslistArchive = ({ notesarc }) => {
   return (

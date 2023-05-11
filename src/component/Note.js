@@ -21,6 +21,18 @@ const Note = ({ id, title, body }) => {
     }
   };
 
+  const handleDeleteNote = async () => {
+    try {
+      const response = await axios.delete(`https://notes-api.dicoding.dev/v1/notes/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
 
@@ -33,7 +45,7 @@ const Note = ({ id, title, body }) => {
 
     <div className='note-footer'>
       <MdArchive className='note-icon' size='1.3em' onClick={handleArchive} />
-      <MdDeleteForever className='note-icon' size='1.3em' />
+      <MdDeleteForever className='note-icon' size='1.3em' onClick={handleDeleteNote} />
     </div>
   </div>
   )

@@ -7,6 +7,7 @@ import axios from 'axios';
 const ArchiveNote = () => {
 
   const [notesarc, setNotesarc] = useState([]);
+  const [user, setUser] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +23,11 @@ const ArchiveNote = () => {
     const accessToken = sessionStorage.getItem('accessToken');
     getNotesArchive(accessToken);
   }, [notesarc])
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    getUser(accessToken);
+  }, [user])
 
   // console.log('disini = ', notesarc)
 
@@ -41,9 +47,25 @@ const ArchiveNote = () => {
     }
   }
 
+  const getUser = async (accessToken) => {
+    try {
+      const response = await axios.get('https://notes-api.dicoding.dev/v1/users/me', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      })
+
+      setUser(response.data.data)
+      // console.log(response.data.data)
+
+    } catch (error) {
+      console.log("error =", error.response.data)
+    }
+  }
+
   return (
     <div className='container'>
-      <HeaderArchive />
+      <HeaderArchive user={user}/>
       <NoteslistArchive notesarc={notesarc}/>
     </div>
   )
