@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../component/Header'
 import Noteslist from '../component/Noteslist'
-import { useNavigate } from 'react-router-dom';
+import Search from '../component/Search'
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Home = () => {
@@ -30,7 +31,7 @@ const Home = () => {
     const accessToken = sessionStorage.getItem('accessToken');
     getUser(accessToken);
   }, [user])
-  
+
 
 
   // console.log("disini = ", user)
@@ -50,7 +51,7 @@ const Home = () => {
     }
   }
 
-  
+
 
   const getUser = async (accessToken) => {
     try {
@@ -68,11 +69,24 @@ const Home = () => {
     }
   }
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState(() => searchParams.get('keyword') || '');
+
+  const ubahKey = (keyword) => {
+    setSearchParams({ keyword });
+    setKeyword(keyword);
+  }
+
+  const filterNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(keyword) ||
+    note.body.toLowerCase().includes(keyword))
+
 
   return (
     <div className='container'>
-      <Header user={user}/>
-      <Noteslist notes={notes} />
+      <Header user={user} />
+      <Search keyword={keyword} keyChange={ubahKey} />
+      <Noteslist notes={filterNotes} />
     </div>
   )
 }

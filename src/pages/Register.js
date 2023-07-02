@@ -21,7 +21,7 @@ const Register = () => {
   //   console.log(requestBody)
   // }
 
-  const Register = async(e) => {
+  const Register = async (e) => {
     e.preventDefault();
     try {
       const requestBody = {
@@ -29,9 +29,9 @@ const Register = () => {
         email: email,
         password: password
       };
-      
+
       const requestBodyString = JSON.stringify(requestBody);
-      
+
       await axios.post('https://notes-api.dicoding.dev/v1/register', requestBodyString, {
         headers: {
           'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ const Register = () => {
       });
       navigate("/login");
     } catch (error) {
-      console.log("Error saat melakukan registrasi:", error.data.message);
+      console.log("Error saat melakukan registrasi:", error.response.data);
     }
   }
 
@@ -48,27 +48,27 @@ const Register = () => {
       <div className='bodyy'>
         <div className='logreg'>
           <h1>User Registrasi</h1>
-          <form  onSubmit={ Register} className='login-form'>
-          <div className='field'>
+          <form onSubmit={Register} className='login-form'>
+            <div className='field'>
               <label className='label'>Nama</label>
-              <input type='text' className='input' placeholder='John Doe' 
+              <input type='text' className='input' placeholder='John Doe'
                 value={name}
-                onChange={(e)=> setName(e.target.value)}
-                // onChange={(e)=> console.log(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
+              // onChange={(e)=> console.log(e.target.value)}
               />
             </div>
             <div className='field'>
               <label className='label'>Email</label>
-              <input type='text' className='input' placeholder='JohnDoe@email.com' 
+              <input type='text' className='input' placeholder='JohnDoe@email.com'
                 value={email}
-                onChange={(e)=> setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className='field'>
               <label className='label'>Password</label>
-              <input type='password' className='input' placeholder='*****' 
+              <input type='password' className='input' placeholder='*****'
                 value={password}
-                onChange={(e)=> setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className='field'>

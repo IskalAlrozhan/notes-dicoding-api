@@ -164,3 +164,38 @@ button {
 button:hover {
   background-color: #3e8e41;
 }
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 1.5em;
+}
+
+.search input {
+  border: none;
+  background-color: rgb(233, 233, 233);
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.detail {
+  display: flex;
+  background-color: #fef68a;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 170px;
+
+  flex-direction: column;
+  white-space: pre-wrap;
+}
+
+.detail .title {
+  font-size: large;
+  font-weight: bold;
+  border-bottom: 1px solid gray;
+}

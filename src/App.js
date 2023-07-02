@@ -3,6 +3,9 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ArchiveNote from './pages/ArchiveNote';
+import DetailNotes from './pages/DetailNotes'
+
+
 
 
 function App() {
@@ -13,6 +16,7 @@ function App() {
         <Route path='/Register' element={<Register />} />
         <Route path='/Login' element={<Login />} />
         <Route path='/ArchiveNote' element={<ArchiveNote />}/>
+        <Route path='/DetailNote/:id' element={<DetailNotes />}/>
       </Routes>
     </BrowserRouter>
   );

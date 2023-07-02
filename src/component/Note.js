@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React from 'react'
-import { MdDeleteForever, MdArchive } from 'react-icons/md'
+import { MdDeleteForever, MdArchive, MdOpenInFull } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 
 const Note = ({ id, title, body }) => {
 
+  const navigate = useNavigate();
   const accessToken = sessionStorage.getItem('accessToken');
 
   const handleArchive = async () => {
@@ -46,6 +48,7 @@ const Note = ({ id, title, body }) => {
     <div className='note-footer'>
       <MdArchive className='note-icon' size='1.3em' onClick={handleArchive} />
       <MdDeleteForever className='note-icon' size='1.3em' onClick={handleDeleteNote} />
+      <MdOpenInFull className='note-icon' size='1.3em' onClick={()=> navigate(`/DetailNote/${id}`)}/>
     </div>
   </div>
   )
